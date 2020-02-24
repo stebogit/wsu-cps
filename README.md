@@ -53,16 +53,16 @@ This means the IP of all your app instances/machines (development, production an
  Contact WSU Central IT to whitelist a new IP.
 
 
-## Process flow
+### Process flow
 
 | Your App | WSU CPS |
 | --- | --- |
-| 1. Call `AuthCapRequestWithCancelURL` web service to preauthorize the payment, generating a `GUID` code identifying the transaction | |
-| 2. Redirect to the CPS (Cybersource) payment form page, where the user inputs credit card data and submit the payment request |
+| 1. Call `AuthCapRequestWithCancelURL` web service to<br> preauthorize the payment, generating a `GUID` code<br> identifying the transaction | |
+| 2. Redirect to the CPS (Cybersource) payment form<br> page, where the user submits the payment request,<br> or cancels the operation | 2. Collects the credit card info and processes the payment |
 |   | 3a. Redirects to `ReturnURL` or`CancelURL` supplied by your app<br> 3b. POSTs to the `PostbackURL` supplied by your app<br> The transaction is marked as "processed" |
-| 4. Call `AuthCapResponse` to complete the transaction, marking it "completed" | |
+| 4. Call `AuthCapResponse` to complete the transaction,<br> marking it "completed" | |
 
-At any time your app can read the status and the data associated with the transaction calling `ReadPaymentAuthorization`
+> **Note:** At any time your app can read the status and the data associated with the transaction calling `ReadPaymentAuthorization`
 
 ![flow](/docs/flow.png "Flow")
 
