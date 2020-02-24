@@ -7,7 +7,7 @@ The Central Payment Site toolkit (CPS) consists of web services, interacting wit
  server, hosted by [Cybersource](https://www.cybersource.com).
 
 So, when it is time to collect a payment from a customer, your application re-directs to the CPS secure web page. 
- After collecting the payment from the customer, the system re-directs back to your application and you can 
+ After collecting the payment from the customer, the system redirects back to your application and you can 
  process the result of the payment (e.g. displaying a receipt to the customer, crediting the customer’s account, 
  initiating shipment processes, etc.).
  
@@ -54,4 +54,15 @@ This means the IP of all your app instances/machines (development, production an
 
 
 ## Process flow
+
+| Your App | WSU CPS |
+| --- | --- |
+| 1. Call `AuthCapRequestWithCancelURL` web service to preauthorize the payment, generating a `GUID` code identifying the transaction | |
+| 2. Redirect to the CPS (Cybersource) payment form page, where the user inputs credit card data and submit the payment request |
+|   | 3a. Redirects to `ReturnURL` or`CancelURL` supplied by your app<br> 3b. POSTs to the `PostbackURL` supplied by your app<br> The transaction is marked as "processed" |
+| 4. Call `AuthCapResponse` to complete the transaction, marking it "completed" | |
+
+At any time your app can read the status and the data associated with the transaction calling `ReadPaymentAuthorization`
+
+![flow](/docs/flow.png "Flow")
 
