@@ -66,3 +66,11 @@ This means the IP of all your app instances/machines (development, production an
 
 ![flow](/docs/flow.png "Flow")
 
+
+### Example
+
+To run a simple example run
+```
+php -S localhost:8080 -t example example/index.php
+```
+then go to http://localhost:8080
